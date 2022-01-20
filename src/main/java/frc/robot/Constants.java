@@ -82,11 +82,11 @@ public final class Constants {
     // Balling
     public static final int lWheelsPort = 6;
     public static final int bWheelsPort = 5;
-    public static final double fastBigW = 1;
+    public static final double fastBigW = 0.8;
     public static final double slowBigW = 0.6;
     public static final double normalBigW = 0.635;
 
-    public static final double fastSmallW = 1;
+    public static final double fastSmallW = 0.8;
     public static final double slowSmallW = 0.4;
     public static final double normalSmallW = 0.7;
 

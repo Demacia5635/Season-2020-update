@@ -45,7 +45,7 @@ public class BallsManager extends CommandBase {
   @Override
   public void initialize() {
     balls.stopMotors();
-    balls.close();
+    balls.low();
     balls.contain();
   }
 

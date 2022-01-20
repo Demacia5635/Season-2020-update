@@ -49,6 +49,7 @@ public class Chassis extends SubsystemBase {
   private final Field2d field = new Field2d();
   private boolean isBrake = true;
   public boolean isReversed = false; 
+  private boolean hasGyro = false;//TODO : add the fucking gyro to the fucking robot
   private XboxController mainController;
   private Drive driveCommand;
 
@@ -81,6 +82,12 @@ public class Chassis extends SubsystemBase {
 
     driveCommand = new Drive(this, mainController);
     setDefaultCommand(driveCommand);
+    try {
+      gyro.getFusedHeading();
+    }
+    catch (Exception e){
+      hasGyro = false;
+    }
   }
 
   public void setVelocity(double left, double right) {
@@ -94,14 +101,11 @@ public class Chassis extends SubsystemBase {
 
   public double getFusedHeading() {
     double res = 0;
-    if (gyro != null) {
-      res =  gyro.getFusedHeading();
-    } else {
+    if (hasGyro){
       
-      if (gyro != null) {
-        res =  gyro.getFusedHeading();
-      }
+      res = gyro.getFusedHeading();
     }
+      
     if (isReversed) return res + 180.0; 
     return res; 
   }
@@ -495,7 +499,8 @@ public class Chassis extends SubsystemBase {
   }
 
   public void setAngle(double degrees){
-    gyro.setFusedHeading(degrees);
+    if (hasGyro)
+      gyro.setFusedHeading(degrees);
   }
 
   public void resetAngle(){

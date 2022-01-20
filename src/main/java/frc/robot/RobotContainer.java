@@ -144,7 +144,7 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     // general
-    final JoystickButton bButtonMain = new JoystickButton(mainController, 2);
+    final JoystickButton backButtonMain = new JoystickButton(mainController, 7);
     final JoystickButton startButtonMain = new JoystickButton(mainController, 8);
     final JoystickButton backButtonSecondary = new JoystickButton(secondaryController, 7); // abort mission
     final JoystickButton startButtonSecondary = new JoystickButton(secondaryController, 8);
@@ -159,6 +159,8 @@ public class RobotContainer {
         ballingCommand.cancel();
       }
     }));
+
+
 
 
      backButtonSecondary.whenPressed(new InstantCommand(() -> {
@@ -176,10 +178,13 @@ public class RobotContainer {
          compressor.start();
        }
      }));
-     bButtonMain.whenHeld(new StartEndCommand(() -> {
+     /*bButtonMain.whenHeld(new StartEndCommand(() -> {
       chassis.setVisionMode();
      }, () -> {
       chassis.setVisionMode();
+     }));*/
+     backButtonMain.whenPressed(new InstantCommand(() -> {
+       chassis.setReverse(!chassis.isReversed);
      }));
   }
 
